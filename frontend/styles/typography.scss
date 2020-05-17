@@ -1,0 +1,24 @@
+.text {
+    color: $color-primary;
+    // color: #c6e2ff;
+
+    // text-shadow:
+    // 0 0 2px rgba(202,228,225,0.92),
+    // 0 0 10px rgba(202,228,225,0.34),
+    // 0 0 4px rgba(30,132,242,0.52),
+    // 0 0 7px rgba(30,132,242,0.92),
+    // 0 0 11px rgba(30,132,242,0.78),
+    // 0 0 16px rgba(30,132,242,0.92);
+
+    &--large {
+        font-size: large;
+    }
+
+    &--extra-large {
+        font-size: $extra-large;
+    }
+
+    &--xxl {
+        font-size: $xxl;
+    }
+}

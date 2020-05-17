@@ -1,0 +1,23 @@
+// @import url("https://fonts.googleapis.com/css?family=Roboto:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@import "./variables.scss";
+@import "./layout.scss";
+@import "./button.scss";
+@import "./input.scss";
+@import "./border.scss";
+@import "./typography.scss";
+@import "./overlay.scss";
+@import "./card.scss";
+@import "./leaderboard.scss";
+@import "./game.scss";
+@import "./auth.scss";
+@import "./firework.scss";
+@import "./modal.scss";
+
+body {
+  margin: 0;
+
+  // font-family: 'Roboto', sans-serif;
+
+  font-family: "VT323", monospace;
+}

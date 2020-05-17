@@ -1,0 +1,13 @@
+Flask
+datetime
+Flask-RESTful
+Flask-Migrate
+uuid
+Flask-SQLAlchemy
+PyJWT
+SQLAlchemy
+flasgger
+mysqlclient
+flask-bcrypt
+flask_jwt_extended
+flask-cors

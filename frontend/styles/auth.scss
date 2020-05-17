@@ -1,0 +1,9 @@
+.auth {
+    &__container {
+        width: 360px;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 16px;
+    }
+}

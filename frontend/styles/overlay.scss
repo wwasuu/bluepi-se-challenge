@@ -1,0 +1,23 @@
+.overlay {
+    &__mask {
+        position: relative;
+        
+    }
+    &__container {
+        background-color: rgba(0,0,0,.75);
+        z-index: 1;
+        width: 100vw;
+        height: 192px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &__content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 100%;
+    }
+}

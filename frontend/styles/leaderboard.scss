@@ -1,0 +1,21 @@
+.leaderboard {
+
+  &__container {
+    padding: 32px;
+  }
+
+  &__table {
+    text-align: center;
+
+    color: $color-primary;
+    font-size: $extra-large;
+  
+    width: 100%;
+    height: 100%;
+  
+    & td{ 
+      padding: 16px 0;
+    }
+  }
+}
+
