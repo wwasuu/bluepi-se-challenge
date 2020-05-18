@@ -1,15 +1,12 @@
-
-import { useDispatch } from "react-redux";
-import { ErrorClearAction } from "../redux/store";
-
 interface IErrorProps {
     message: string;
+    clearError: () => void;
 }
 
-const Modal: React.FC<IErrorProps> = ({ message }) => {
-  const dispatch = useDispatch();
+const Modal: React.FC<IErrorProps> = ({ message, clearError }) => {
+
   return (
-    <div className="error__mask" onClick={() => dispatch(ErrorClearAction())}>
+    <div className="error__mask" onClick={clearError}>
       <div className="error__container border--pixel">
         <div className="error__content">
           <div>Error</div>

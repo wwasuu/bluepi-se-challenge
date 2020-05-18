@@ -1,0 +1,3 @@
+xxx:
+	pwd
+	npm install

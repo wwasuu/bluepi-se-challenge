@@ -9,6 +9,7 @@ import {
   AuthLoggedInAction,
   UserSetAction,
   ApplicationState,
+  ErrorClearAction
 } from "../redux/store";
 import { MeService } from "../service";
 import "../styles/main.scss";
@@ -53,7 +54,7 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      {error && <Error message={error.message} />}
+      {error && <Error message={error.message} clearError={() => dispatch(ErrorClearAction())} />}
       <Component {...pageProps} />
     </>
   );

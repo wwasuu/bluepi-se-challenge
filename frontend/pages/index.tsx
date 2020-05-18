@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Card, Spinner } from "../components";
 import generateCard from "../libs/generateCard";
 import { withRedux } from "../redux";

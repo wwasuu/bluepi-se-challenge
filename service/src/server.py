@@ -32,8 +32,6 @@ bcrypt = Bcrypt(server)
 CORS(server)
 migrate = Migrate()
 
-print(config)
-
 server.config['JWT_SECRET_KEY'] = config.SECRET_KEY
 server.debug = config.DEBUG
 server.config["SQLALCHEMY_DATABASE_URI"] = config.DB_URI
