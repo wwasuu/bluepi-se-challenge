@@ -4,10 +4,10 @@
 
 ## Screenshots
 
-![Lobby](https://greenliciousbkk.s3.ap-southeast-1.amazonaws.com/30c57550-9928-11ea-bb48-a74949d17ea9.png)
-![Game Start](https://greenliciousbkk.s3.ap-southeast-1.amazonaws.com/ac7287b0-9928-11ea-bb48-a74949d17ea9.png)
-![Game Finish](https://greenliciousbkk.s3.ap-southeast-1.amazonaws.com/96a18210-9928-11ea-bb48-a74949d17ea9.png)
-![Leaderboard](https://greenliciousbkk.s3.ap-southeast-1.amazonaws.com/82375f70-9928-11ea-bb48-a74949d17ea9.png)
+![Lobby](screenshot/lobby.png)
+![Game Start](screenshot/game-start.png)
+![Game Finish](screenshot/game-finish.png)
+![Leaderboard](screenshot/leaderboard.png)
 
 ### Required
 - Node.js > 10.x
@@ -25,12 +25,14 @@
 
 
 ```sh
-make install
+make install.frontend
+make install.server
 ```
 
 ## Start
 ```sh
-make start
+make start.frontend
+make start.server
 ```
 
 ## Tests
