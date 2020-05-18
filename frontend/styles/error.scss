@@ -1,0 +1,29 @@
+.error {
+    &__mask {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+
+        background-color: rgba(0,0,0,.45);
+    }
+    &__container {
+        width: 360px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 98;
+
+        background-color: $color-primary;
+
+        @media screen and (max-width: 425px) {
+            width: 320px;
+          }
+    }
+    &__content {
+        padding: 32px;
+
+        font-size: $extra-large;
+    }
+}

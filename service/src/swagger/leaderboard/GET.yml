@@ -1,0 +1,37 @@
+Return a leaderboard information
+---
+tags:
+  - leaderboard   
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+  - name: limit
+    in: query
+    type: number
+    description: Number of information records
+responses:
+  200:
+    description: The leaderboard's information were successfully retrieved
+    schema:
+      type: array
+      example:
+        success: true
+        game: 
+          id: 2
+          uid: "42fae9e4-6686-428c-b949-08ace60b9c94"
+          user_id: 1
+          score: 12
+          time: 7
+          created_at: "0000-00-00 00:00:00"
+          updated_at: "0000-00-00 00:00:00"
+          user:
+            id: 1
+            username: "R2D2"
+            best_score: 12
+            best_time: 10
+            created_at: "0000-00-00 00:00:00"
+            updated_at: "0000-00-00 00:00:00"
+            

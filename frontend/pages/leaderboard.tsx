@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import { LeaderboardService } from "../service";
 import { HHmmss } from "../utils";
+import { IGame } from "../types"
 
-function Leaderboard() {
-  const [leaderboard, setLeaderboard] = useState([]);
+const Leaderboard: React.FC = () => {
+  const [leaderboard, setLeaderboard] = useState<IGame[]>([]);
 
   useEffect(() => {
     init();
@@ -14,7 +15,7 @@ function Leaderboard() {
     try {
       const {
         data: { game },
-      } = await LeaderboardService.get();
+      } = await LeaderboardService.get({ params: { limit: 10 } });
       setLeaderboard(game);
     } catch (error) {
       console.log(error);
@@ -30,7 +31,7 @@ function Leaderboard() {
           </a>
         </Link>
       </div>
-      <div>
+      <div className="leaderboard__container">
         <table className="leaderboard__table border--pixel">
           <thead>
             <tr>
@@ -41,24 +42,25 @@ function Leaderboard() {
             </tr>
           </thead>
           <tbody>
-            {leaderboard.map((x, i) => (
-              <tr key={`leaderboard-${i + 1}`}>
-                <td>{i + 1}</td>
-                <td>{x.user.username}</td>
-                <td>{x.score}</td>
-                <td>{HHmmss(x.time)}</td>
-              </tr>
-            ))}
-            {
+            {leaderboard.length ? (
+              leaderboard.map((x: IGame, i: number) => (
+                <tr key={`leaderboard-${i + 1}`}>
+                  <td>{i + 1}</td>
+                  <td>{x.user.username}</td>
+                  <td>{x.score}</td>
+                  <td>{HHmmss(x.time)}</td>
+                </tr>
+              ))
+            ) : (
               <tr>
                 <td colSpan={4}>No Record</td>
               </tr>
-            }
+            )}
           </tbody>
         </table>
       </div>
     </div>
   );
-}
+};
 
 export default Leaderboard;

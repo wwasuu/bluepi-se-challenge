@@ -19,5 +19,5 @@
       "target": "esnext"
     },
     "exclude": ["node_modules"],
-    "include": ["**/*.ts", "**/*.tsx", "redux/index.js"]
+    "include": ["**/*.ts", "**/*.tsx", "redux/index.ts", "redux/store.js"]
   }

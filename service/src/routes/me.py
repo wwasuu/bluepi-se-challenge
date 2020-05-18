@@ -1,26 +1,24 @@
 """
 Defines the blueprint for the users
 """
+from flasgger import swag_from
 from flask import Blueprint
 from flask.json import jsonify
 from flask_restful import Api
-from flask_jwt_extended import (create_access_token, jwt_required, get_jwt_identity)
+from flask_jwt_extended import jwt_required
 
-# from resources import MeResource
 from repositories import UserRepository
 
 ME_BLUEPRINT = Blueprint("me", __name__)
 
-@ME_BLUEPRINT.route('/me')
+@ME_BLUEPRINT.route('/me', methods=['GET'])
 @jwt_required
-def get():
+@swag_from("../swagger/me/GET.yml")
+def me():
     try:
         id = 1
         """ Get user by id """
         user = UserRepository.getById(id)
-        return jsonify({"user": user.serialize})
+        return jsonify({"user": user.serialize, "success": True})
     except:
         return {'message': 'Something went wrong'}
-
-# Api(ME_BLUEPRINT).add_resource(
-#     MeResource, "/me")

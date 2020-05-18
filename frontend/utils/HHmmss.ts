@@ -1,4 +1,5 @@
 function HHmmss(time: number): String {
+    if (time <= 0) return "00:00:00"
     var pad = function(num: number, size: number) { return ('000' + num).slice(size * -1); }
     let hours = Math.floor(time / 60 / 60)
     let minutes = Math.floor(time / 60) % 60

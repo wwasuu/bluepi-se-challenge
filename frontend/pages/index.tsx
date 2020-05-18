@@ -1,29 +1,31 @@
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import cn from "classnames";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Card, Spinner } from "../components";
 import generateCard from "../libs/generateCard";
-import HHmmss from "../utils/HHmmss";
-import { GameService, LeaderboardService } from "../service";
 import { withRedux } from "../redux";
+import { ApplicationState } from "../redux/store";
+import { GameService, LeaderboardService } from "../service";
+import { ICard, IGame } from "../types";
+import HHmmss from "../utils/HHmmss";
 
 let timerId: number = 0;
 
 function App() {
-  const [game, setGame] = useState(null);
-  const [gameState, setGameState] = useState("INITIALIZE");
-  const user = useSelector((state: any) => state.user);
-  const [timer, setTimer] = useState(0);
-  const [isProcessing, setProcessing] = useState(true);
-  const [previousCard, setPreviousCard] = useState(null);
-  const [numberOfClick, setNumberOfClick] = useState(0);
-  const [numberOfOpennedCard, setNumberOfOpennedCard] = useState(0);
-  const [cards, setCards] = useState([]);
-  const [topScore, setTopScore] = useState(0)
+  const user = useSelector((state: ApplicationState) => state.user);
+  const [game, setGame] = useState<IGame | null | undefined>(null);
+  const [gameState, setGameState] = useState<string>("INITIALIZE");
+  const [timer, setTimer] = useState<number>(0);
+  const [isProcessing, setProcessing] = useState<boolean>(true);
+  const [previousCard, setPreviousCard] = useState<ICard | null>(null);
+  const [numberOfClick, setNumberOfClick] = useState<number>(0);
+  const [numberOfOpennedCard, setNumberOfOpennedCard] = useState<number>(0);
+  const [cards, setCards] = useState<ICard[]>([]);
+  const [topScore, setTopScore] = useState<number>(0);
 
   useEffect(() => {
     newGame();
-    getTopScore()
+    getTopScore();
   }, []);
 
   async function newGame() {
@@ -54,13 +56,13 @@ function App() {
 
   async function getTopScore() {
     try {
-      const { data: { game } } = await LeaderboardService.get({ params: { limit: 1 } })
+      const {
+        data: { game },
+      } = await LeaderboardService.get({ params: { limit: 1 } });
       if (game.length) {
-        setTopScore(game[0].score)
+        setTopScore(game[0].score);
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   }
 
   function startGame() {
@@ -91,14 +93,6 @@ function App() {
     setCards(tmp);
   }
 
-  function setDefault() {
-    setProcessing(false);
-    setPreviousCard(null);
-    setNumberOfOpennedCard(0);
-    setTimer(0);
-    setNumberOfClick(0);
-  }
-
   function openCard(card: any): void {
     let isNeedReset = false;
     let nextCard = card;
@@ -121,19 +115,19 @@ function App() {
     ) {
       nextCard = null;
     }
-    const tmpCards = cards.map((x) => {
+    const tmpCards = cards.map((x: ICard) => {
       if (card.id === x.id) {
         return { ...x, isOpen: true };
       }
       return x;
     });
-    setNumberOfOpennedCard((prevState) => prevState + 1);
+    setNumberOfOpennedCard((prevState: number) => prevState + 1);
 
     // set previous card value for checking
     setPreviousCard(nextCard);
 
     // set card
-    const totalNumberOfClick: number = numberOfClick + 1
+    const totalNumberOfClick: number = numberOfClick + 1;
     setNumberOfClick(totalNumberOfClick);
     setCards(tmpCards);
 
@@ -158,8 +152,9 @@ function App() {
 
   async function finishGame(totalNumberOfClick: number) {
     try {
+      if (!game) return
       setGameState("SAVING");
-      const res = await GameService.update(game?.id, {
+      await GameService.update(game.id, {
         score: totalNumberOfClick,
         time: timer,
       });
@@ -193,18 +188,14 @@ function App() {
       {(gameState === "INITIALIZE" ||
         gameState === "PREPARING" ||
         gameState === "COMPLETED") && (
-        <div className="overlay__container">
-          <div className="overlay__content">
-            <div className="text text--xxl">{renderOverlayText(gameState)}</div>
-          </div>
-        </div>
+          <Spinner message={renderOverlayText(gameState)} />
       )}
       <div>
         <p className="text text--extra-large">Hi, {user?.username} </p>
         <p className="text text--extra-large">Time: {HHmmss(timer)}</p>
         <p className="text text--extra-large">Click: {numberOfClick}</p>
         <p className="text text--extra-large">
-          Your Best: {user?.score ?? "-"}
+          Your Best: {user?.best_score ?? "-"}
         </p>
         <p className="text text--extra-large">World Best: {topScore || "-"}</p>
         <p>
@@ -229,17 +220,13 @@ function App() {
         </p>
       </div>
       <div className="card__list">
-        {cards.map((x, i) => (
-          <div
+        {cards.map((x: ICard, i: number) => (
+          <Card
             key={`card-${x}-${i}`}
-            className={cn("card", { "card--open": x.isOpen })}
-            onClick={() => openCard(x)}
-          >
-            <div className="content">
-              <div className="front">{x.value}</div>
-              <div className="back">{x.isOpen && x.value}</div>
-            </div>
-          </div>
+            isOpen={x.isOpen}
+            value={x.value}
+            openCard={() => openCard(x)}
+          />
         ))}
       </div>
     </div>

@@ -17,7 +17,7 @@ class Auth(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = "auth"
 
-    id = db.Column(db.Integer, primary_key=True, auto_increment=True)
+    id = db.Column(db.Integer, primary_key=True, auto_increment=True)    
     username = db.Column(db.String(50))
     password = db.Column(db.Text)
     token = db.Column(db.Text, nullable=True)

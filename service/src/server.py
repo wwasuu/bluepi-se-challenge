@@ -4,6 +4,7 @@ from flask.blueprints import Blueprint
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, jwt_required
 from flask_cors import CORS
+from flask_migrate import Migrate
 
 import config
 import routes
@@ -29,14 +30,18 @@ server.config["SWAGGER"] = {
 Swagger(server)
 bcrypt = Bcrypt(server)
 CORS(server)
+migrate = Migrate()
 
-server.config['JWT_SECRET_KEY'] = 'bluepi-game'
+print(config)
+
+server.config['JWT_SECRET_KEY'] = config.SECRET_KEY
 server.debug = config.DEBUG
-server.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:b15d873e209b5c8b2f7ec7c5dd4059c0926d8e539ed5e610@165.22.109.7:3306/blue_pi"
+server.config["SQLALCHEMY_DATABASE_URI"] = config.DB_URI
 server.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config.SQLALCHEMY_TRACK_MODIFICATIONS
 server.config['PROPOGATE_EXCEPTIONS'] = True
 db.init_app(server)
 db.app = server
+migrate.init_app(server, db)
 
 jwt = JWTManager(server)
 

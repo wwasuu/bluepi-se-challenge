@@ -1,23 +1,32 @@
 .layout {
-    display: block;
-    padding: 32px;
-    box-sizing: border-box;
+  display: block;
+  padding: 32px;
+  box-sizing: border-box;
 
-    min-height: 100vh;
-    width: 100vw; 
+  min-height: 100vh;
+  width: 100vw;
 
-    background-image: url("/images/background/1.gif");
-    background-size: contain;
-    &--main {
-        display: grid;
-        grid-template-columns: 320px 1fr;
-        column-gap: 16px;
-        align-items: flex-start;
+  background-image: url("/images/background/1.gif");
+  background-size: contain;
+
+  @media screen and (max-width: 425px) {
+    background-size: cover;
+    padding: 16px;
+  }
+
+  &--main {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    column-gap: 16px;
+    align-items: flex-start;
+    @media screen and (max-width: 425px) {
+        grid-template-columns: 1fr;
     }
+  }
 
-    &__auth {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  &__auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

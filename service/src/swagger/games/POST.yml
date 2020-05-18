@@ -1,0 +1,31 @@
+Create game
+---
+tags:
+  - game   
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+    required: true
+responses:
+  200:
+    description: create game
+    schema:
+      example:
+        game: 
+            id: 1
+            uid: "uid"
+            user_id: 1
+            score: Null
+            user: 
+              id: 1
+              username: "R2D2"
+              best_score: 12
+              best_time: 10
+              created_at: "0000-00-00 00:00:00"
+              updated_at: "0000-00-00 00:00:00"
+            time: Null
+            created_at: "0000-00-00 00:00:00"
+            updated_at: "0000-00-00 00:00:00"
+        success: true

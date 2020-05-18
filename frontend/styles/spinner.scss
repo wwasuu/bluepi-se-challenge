@@ -1,11 +1,11 @@
-.overlay {
+.spinner {
     &__mask {
         position: relative;
         
     }
     &__container {
         background-color: rgba(0,0,0,.75);
-        z-index: 1;
+        z-index: 99;
         width: 100vw;
         height: 192px;
         position: absolute;

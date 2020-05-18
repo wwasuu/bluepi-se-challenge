@@ -1,0 +1,24 @@
+Authenticate
+---
+tags:
+  - authenticate   
+parameters:
+  - in: body
+    name: auth
+    schema:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+responses:
+  200:
+    description: Authenticated
+    schema:
+      example:
+        access_token: "access_token"
+        success: true
