@@ -17,7 +17,7 @@ class User(db.Model, BaseModel, metaclass=MetaBaseModel):
     
     __tablename__ = "user"
 
-    id = db.Column(db.Integer, primary_key=True, auto_increment=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50))
     best_score = db.Column(db.Integer, nullable=True)
     best_time = db.Column(db.Integer, nullable=True)

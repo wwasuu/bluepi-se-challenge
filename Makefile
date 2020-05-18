@@ -5,7 +5,7 @@ install.frontend:
 	cd frontend && npm install
 
 install.server: 
-	cd service && virtualenv env && source /env/bin/activate && pip3 install -r requirements.txt
+	cd service && virtualenv env && source env/bin/activate && pip3 install -r requirements.txt
 
 start.frontend: 
 	cd frontend && rm -rf .next && npm run build && npm start

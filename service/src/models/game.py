@@ -18,7 +18,7 @@ class Game(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = "game"
 
-    id = db.Column(db.Integer, primary_key=True, auto_increment=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     uid = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     score = db.Column(db.Integer, nullable=True)
